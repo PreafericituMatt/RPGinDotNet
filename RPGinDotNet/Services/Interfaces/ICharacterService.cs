@@ -1,12 +1,13 @@
-﻿using RPGinDotNet.Models;
+﻿using RPGinDotNet.Dtos.Character;
+using RPGinDotNet.Models;
 
 namespace RPGinDotNet.Services.Interfaces
 {
     public interface ICharacterService
     {
-        Task<List<Character>> GetAllCharacters();
-        Task<Character> GetCharacterById(int id);
-        Task<Character> GetDefault();
-        Task<List<Character>> AddCharacter(Character newCharacter);
+        Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters();
+        Task<ServiceResponse<GetCharacterDto>> GetCharacterById(int id);
+        Task<ServiceResponse<GetCharacterDto>> GetDefault();
+        Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter);
     }
 }
