@@ -16,6 +16,7 @@ namespace RPGinDotNet.Services.Implementation
             new Character(){Name = "cineva",Id = 2, HitPoints = 100,Defence = 20,Class = RpgClass.Mage},
             new Character(){Name = "Ghiza",Id = 1, Intelligence = 69,Class = RpgClass.Knight}
         };
+        //static characters
         */
         private readonly IMapper _mapper;
         private readonly DataContext _context;
