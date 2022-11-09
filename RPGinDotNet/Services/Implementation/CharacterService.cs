@@ -10,12 +10,13 @@ namespace RPGinDotNet.Services.Implementation
     public class CharacterService : ICharacterService
     {
         private static Character defaultCharacter = new() { Name = "default", Id = 0 };
+        /*
         private static List<Character> characters = new()
         {
             new Character(){Name = "cineva",Id = 2, HitPoints = 100,Defence = 20,Class = RpgClass.Mage},
             new Character(){Name = "Ghiza",Id = 1, Intelligence = 69,Class = RpgClass.Knight}
         };
-
+        */
         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
@@ -56,7 +57,7 @@ namespace RPGinDotNet.Services.Implementation
             var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
             Character character = _mapper.Map<Character>(newCharacter);
             _context.Characters.Add(character);
-            characters.Add(character);
+           // characters.Add(character);
             await _context.SaveChangesAsync();
             serviceResponse.Data = await _context.Characters
                 .Select(c => _mapper.Map<GetCharacterDto>(c))
