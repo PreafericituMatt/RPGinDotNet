@@ -56,5 +56,46 @@ namespace RPGinDotNet.Services.Implementation
             serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
             return serviceResponse;
         }
+
+        public async Task<ServiceResponse<GetCharacterDto>> UpdateCharacter(UpdateCharacterDto updatedCharacter)
+        {
+            ServiceResponse<GetCharacterDto> response = new ServiceResponse<GetCharacterDto>();
+
+            try
+            { 
+                Character character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
+
+                _mapper.Map(updatedCharacter, character);
+                
+                response.Data = _mapper.Map<GetCharacterDto>(character);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Mesage = ex.Message;
+            }
+            return response;
+
+
+        }
+
+        public async Task<ServiceResponse<List<GetCharacterDto>>> DeleteCharacter(int id)
+        {
+            ServiceResponse<List<GetCharacterDto>> response = new ServiceResponse<List<GetCharacterDto>>();
+
+            try
+            {
+                Character character = characters.FirstOrDefault(c => c.Id == id);
+                characters.Remove(character);
+                response.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Mesage = ex.Message;
+            }
+            return response;
+
+        }
     }
 }
